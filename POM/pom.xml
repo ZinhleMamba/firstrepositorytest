@@ -107,10 +107,27 @@
    <profile>
 <id>Screenreports</id>
   <build>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+    <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
-        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
         <plugin>
+             <groupId>org.codehaus.mojo</groupId>
+             <artifactId>properties-maven-plugin</artifactId>
+              <version>1.0-alpha-2</version>
+             <configuration>
+                 <outputFile>${project.build.directory}/app.properties</outputFile>
+             </configuration>
+             <executions>
+                 <execution>
+                     <id>write-project-properties</id>
+                     <goals>
+                         <goal>write-project-properties</goal>
+                     </goals>
+                     <phase>generate-resources</phase>
+                 </execution>
+             </executions>
+         </plugin>
+        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.1.0</version>
         </plugin>
@@ -129,10 +146,13 @@
           <configuration>
           <reportsDirectory>${project.build.directory}/surefire-reports-${maven.build.timestamp}</reportsDirectory>
 						<suiteXmlFiles>
-							<suiteXmlFile>screenshots.xml</suiteXmlFile>
+							<suiteXmlFile>listeners.xml</suiteXmlFile>
 						</suiteXmlFiles>
 					</configuration>
         </plugin>
+        </plugins>
+        <pluginManagement>
+        <plugins>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.0.2</version>
@@ -151,23 +171,7 @@
           <version>3.7.1</version>
         </plugin>
         
-		<plugin>
-             <groupId>org.codehaus.mojo</groupId>
-             <artifactId>properties-maven-plugin</artifactId>
-              <version>1.0-alpha-2</version>
-             <configuration>
-                 <outputFile>${project.build.directory}/app.properties</outputFile>
-             </configuration>
-             <executions>
-                 <execution>
-                     <id>write-project-properties</id>
-                     <goals>
-                         <goal>write-project-properties</goal>
-                     </goals>
-                     <phase>generate-resources</phase>
-                 </execution>
-             </executions>
-         </plugin>
+		
         <plugin>
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>

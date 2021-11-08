@@ -4,11 +4,19 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import FrameworkClasses.Utilities;
+
 public class Listeners implements ITestListener {
+	Utilities uts = new Utilities();
 
 	@Override
 	public void onTestStart(ITestResult result) {
 		System.out.println("Listeners on Start Test Line"+ result.getName()  );
+		try {
+			uts.takeSnapShot("On test start"+ uts.timereturn()+ ".png");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		// TODO Auto-generated method stub
 		//ITestListener.super.onTestStart(result);
 	}
@@ -16,6 +24,11 @@ public class Listeners implements ITestListener {
 	@Override
 	public void onTestSuccess(ITestResult result) {
 		System.out.println("Listeners success  Line"+ result.getName()  );
+		try {
+			uts.takeSnapShot("On test success"+ uts.timereturn()+ ".png");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		// TODO Auto-generated method stub
 		//ITestListener.super.onTestSuccess(result);
 	}
@@ -23,6 +36,11 @@ public class Listeners implements ITestListener {
 	@Override
 	public void onTestFailure(ITestResult result) {
 		System.out.println("Listeners failing  Line"+ result.getName()  );
+		try {
+			uts.takeSnapShot("On test failure"+ uts.timereturn()+ ".png");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		// TODO Auto-generated method stub
 		//ITestListener.super.onTestFailure(result);
 	}
